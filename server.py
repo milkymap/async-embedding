@@ -74,16 +74,7 @@ class APIServer:
         )
     
     async def handle_compute_embedding(self, incoming_req:ComputeEmbeddingRequestModel):
-        time.sleep(0.1)
-        return JSONResponse(
-            status_code=200,
-            content=ComputeEmbeddingResponseModel(
-                status=False,
-                content=ComputeEmbeddingResponseContentModel(),
-                error_message='vectorizer is not alive ...!' 
-            ).dict()
-        )
-    
+       
         async with self.access_card:
             async with self.socket_mutex:
                 if not self.vectorizer_is_alive.is_set():
